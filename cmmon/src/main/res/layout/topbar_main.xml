@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/actionBarSize"
+    android:background="@color/actionbar" >
+
+    <ImageButton
+        android:id="@+id/ib_topbar_left"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5.0dip"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingLeft="10.0dip"
+        android:scaleType="center"
+        android:src="@mipmap/arrow_topbar"/>
+
+    <TextView
+        android:id="@+id/tv_toptitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:maxWidth="200.0dip"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:singleLine="true"
+        android:text="石嘴山机关智慧党建"
+        android:textColor="@color/white"
+        android:textSize="20.0sp" />
+
+    <ImageButton
+        android:id="@+id/ib_topbar_menu"
+        android:layout_width="@dimen/actionBarSize"
+        android:layout_height="@dimen/actionBarSize"
+        android:background="@drawable/btn_default_light"
+        android:src="@mipmap/ic_menu_white"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:scaleType="center" />
+
+</RelativeLayout>

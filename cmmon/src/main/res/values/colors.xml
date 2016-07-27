@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FC4046</color>
+    <color name="colorPrimaryDark">#CF2D30</color>
+    <color name="colorAccent">#FC4046</color>
+
+    <color name="actionbar">#FC4046</color>
+    <color name="pstsIndicatorColor">#FC4046</color>
+    <color name="pstsTextColorSelected">#FC4046</color>
+    <color name="pstsTextColorNormal">#90222222</color>
+    <color name="button_login_normal">#FB5724</color>
+    <color name="button_login_pressed">#FC4046</color>
+    <color name="line_navigation">#F7C497</color>
+    <color name="navigation_menu_text_normal">#FDFCFC</color>
+    <color name="navigation_menu_text_pressed">#D24826</color>
+    <color name="button_indicate_bg_normal">#E3E3E3</color>
+    <color name="button_indicate_bg_pressed">#FC4046</color>
+    <color name="button_indicate_bg_green">#6FD0A2</color>
+    <color name="button_indicate_bg_yellow">#FABF0C</color>
+
+    <color name="text_color_bright_blue">#ff00baff</color>
+
+    <color name="green">#83B63C</color>
+    <color name="deep_green">#A3BF47</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="black">#952C2C2C</color>
+    <color name="black_99">#99222222</color>
+    <color name="gray_bg">#DADADA</color>
+    <color name="gray_text">#B5B6B7</color>
+    <color name="gray_line">#E7E7E7</color>
+    <color name="blue_text">#4BB2F8</color>
+    <color name="blue_deep">#4097C2</color>
+    <color name="blue_dark">#8DD2D2</color>
+
+    <color name="btn_default_light_normal">#00000000</color>
+    <color name="btn_default_light_pressed">#40ffffff</color>
+
+    <color name="yellow">#FF9A0A</color>
+    <color name="transparent">#10000000</color>
+</resources>
