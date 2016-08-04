@@ -89,7 +89,6 @@ public class WebActivity extends BaseActivity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 //TODO 加载中的布局
-//                ToastUtils.showProgressToast(NewsDetailActivity.this, true);
                 super.onPageStarted(view, url, favicon);
 
             }
@@ -97,7 +96,6 @@ public class WebActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 // TODO 加载中的布局 消失
-//                ToastUtils.dismissProgressToast();
                 super.onPageFinished(view, url);
             }
 

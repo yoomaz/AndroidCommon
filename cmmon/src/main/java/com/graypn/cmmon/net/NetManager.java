@@ -2,6 +2,7 @@ package com.graypn.cmmon.net;
 
 import android.content.Context;
 
+import com.graypn.cmmon.utils.NetworkUtils;
 import com.graypn.cmmon.utils.ToastUtils;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -37,7 +38,7 @@ public class NetManager {
      * <p/>
      * Get方式
      */
-    public static String getString(String url) throws IOException {
+    public static String getData(String url) throws IOException {
         if (NetworkUtils.isConnected(mContext)) {
             Request request = new Request.Builder()
                     .url(url)
@@ -45,8 +46,7 @@ public class NetManager {
             Response response = mOkHttpClient.newCall(request)
                     .execute();
             if (response.isSuccessful()) {
-                String responseUrl = response.body().string();
-                return responseUrl;
+                return response.body().string();
             } else {
                 throw new IOException("Unexpected code " + response);
             }

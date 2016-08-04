@@ -1,40 +1,24 @@
 package com.graypn.cmmon.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.kaopiz.kprogresshud.KProgressHUD;
-
 /**
- * Created by graypn on 16/1/8.
+ * Created by ZhuLei on 16/8/4.
+ * Email: zhuleineuq@gmail.com
  */
 public class ToastUtils {
 
-    private static KProgressHUD progressToast;
+    private static Toast toast;
 
-    public static void showToast(Context context, String text) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
-    }
-
-    public static void showProgressToast(Context context, boolean cancleable) {
-        progressToast = KProgressHUD.create(context)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(cancleable)
-                .show();
-    }
-
-    public static void showProgressToast(Context context, String text, boolean cancleable) {
-        progressToast = KProgressHUD.create(context)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(cancleable)
-                .setLabel(text).show();
-    }
-
-    public static void dismissProgressToast() {
-        if (progressToast != null) {
-            progressToast.dismiss();
-            progressToast = null;
+    public static void showToast(Context context, String message) {
+        if (TextUtils.isEmpty(message)) return;
+        if (toast == null) {
+            toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(message);
         }
+        toast.show();
     }
-
 }

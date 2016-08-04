@@ -1,4 +1,4 @@
-package com.graypn.cmmon.net;
+package com.graypn.cmmon.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
