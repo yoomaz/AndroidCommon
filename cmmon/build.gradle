@@ -26,7 +26,7 @@ dependencies {
 
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.kaopiz:kprogresshud:1.0.2'
     compile 'com.jcodecraeer:xrecyclerview:1.2.6'
 }

@@ -4,30 +4,29 @@ import android.content.Context;
 
 import com.graypn.cmmon.utils.NetworkUtils;
 import com.graypn.cmmon.utils.ToastUtils;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.FormEncodingBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
+
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * 封装网络部分
  * <p/>
- * Created by graypn on 15/3/8.
+ * 基于 Okhttp3
+ * Dependence：compile 'com.squareup.okhttp3:okhttp:3.4.1'
+ * <p/>
+ * Created by graypn on 16/8/4.
  */
 public class NetManager {
 
     private static final OkHttpClient mOkHttpClient = new OkHttpClient();
     private static Context mContext;
-
-    static {
-        mOkHttpClient.setConnectTimeout(30, TimeUnit.SECONDS);
-    }
 
     public static void init(Context context) {
         mContext = context;
@@ -40,10 +39,12 @@ public class NetManager {
      */
     public static String getData(String url) throws IOException {
         if (NetworkUtils.isConnected(mContext)) {
-            Request request = new Request.Builder()
+            Request request = new Request
+                    .Builder()
                     .url(url)
                     .build();
-            Response response = mOkHttpClient.newCall(request)
+            Response response = mOkHttpClient
+                    .newCall(request)
                     .execute();
             if (response.isSuccessful()) {
                 return response.body().string();
@@ -80,7 +81,7 @@ public class NetManager {
      */
     public static void getDataAsyncInPost(String url, Map<String, String> params, Callback responseCallback) {
         if (NetworkUtils.isConnected(mContext)) {
-            FormEncodingBuilder builder = new FormEncodingBuilder();
+            FormBody.Builder builder = new FormBody.Builder();
             if (params != null) {
                 for (String key : params.keySet()) {
                     builder.add(key, params.get(key));
