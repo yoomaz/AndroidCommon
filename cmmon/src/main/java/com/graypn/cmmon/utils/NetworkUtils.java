@@ -47,20 +47,6 @@ public class NetworkUtils {
     }
 
     /**
-     * 获取ConnectivityManager
-     */
-    public static ConnectivityManager getConnectivityManager(Context context) {
-        return (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-    }
-
-    /**
-     * 获取TelephonyManager
-     */
-    public static TelephonyManager getTelephonyManager(Context context) {
-        return (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-    }
-
-    /**
      * 判断网络连接是否有效（此时可传输数据）。
      *
      * @return boolean 不管wifi，还是mobile net，只有当前在连接状态（可有效传输数据）才返回true,反之false。
@@ -68,23 +54,6 @@ public class NetworkUtils {
     public static boolean isConnected(Context context) {
         NetworkInfo net = getConnectivityManager(context).getActiveNetworkInfo();
         return net != null && net.isConnected();
-    }
-
-    /**
-     * 判断有无网络正在连接中（查找网络、校验、获取IP等）。
-     *
-     * @return boolean 不管wifi，还是mobile net，只有当前在连接状态（可有效传输数据）才返回true,反之false。
-     */
-    public static boolean isConnectedOrConnecting(Context context) {
-        NetworkInfo[] nets = getConnectivityManager(context).getAllNetworkInfo();
-        if (nets != null) {
-            for (NetworkInfo net : nets) {
-                if (net.isConnectedOrConnecting()) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     /**
@@ -106,6 +75,23 @@ public class NetworkUtils {
     }
 
     /**
+     * 判断有无网络正在连接中（查找网络、校验、获取IP等）。
+     *
+     * @return boolean 不管wifi，还是mobile net，只有当前在连接状态（可有效传输数据）才返回true,反之false。
+     */
+    public static boolean isConnectedOrConnecting(Context context) {
+        NetworkInfo[] nets = getConnectivityManager(context).getAllNetworkInfo();
+        if (nets != null) {
+            for (NetworkInfo net : nets) {
+                if (net.isConnectedOrConnecting()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * 是否存在有效的WIFI连接
      */
     public static boolean isWifiConnected(Context context) {
@@ -115,8 +101,6 @@ public class NetworkUtils {
 
     /**
      * 是否存在有效的移动连接
-     *
-     * @return boolean
      */
     public static boolean isMobileConnected(Context context) {
         NetworkInfo net = getConnectivityManager(context).getActiveNetworkInfo();
@@ -191,35 +175,6 @@ public class NetworkUtils {
     }
 
     /**
-     * 打印当前各种网络状态
-     *
-     * @return boolean
-     */
-    public static boolean printNetworkInfo(Context context) {
-        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivity != null) {
-            NetworkInfo in = connectivity.getActiveNetworkInfo();
-            Log.i(TAG, "-------------$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-------------");
-            Log.i(TAG, "getActiveNetworkInfo: " + in);
-            NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null) {
-                for (int i = 0; i < info.length; i++) {
-                    // if (info[i].getType() == ConnectivityManager.TYPE_WIFI) {
-                    Log.i(TAG, "NetworkInfo[" + i + "]isAvailable : " + info[i].isAvailable());
-                    Log.i(TAG, "NetworkInfo[" + i + "]isConnected : " + info[i].isConnected());
-                    Log.i(TAG, "NetworkInfo[" + i + "]isConnectedOrConnecting : " + info[i].isConnectedOrConnecting());
-                    Log.i(TAG, "NetworkInfo[" + i + "]: " + info[i]);
-                    // }
-                }
-                Log.i(TAG, "\n");
-            } else {
-                Log.i(TAG, "getAllNetworkInfo is null");
-            }
-        }
-        return false;
-    }
-
-    /**
      * get connected network type by {@link ConnectivityManager}
      * <p/>
      * such as WIFI, MOBILE, ETHERNET, BLUETOOTH, etc.
@@ -234,18 +189,6 @@ public class NetworkUtils {
             return net.getType();
         }
         return -1;
-    }
-
-    /**
-     * get network type by {@link TelephonyManager}
-     * <p/>
-     * such as 2G, 3G, 4G, etc.
-     *
-     * @return {@link TelephonyManager#NETWORK_TYPE_CDMA}, {@link TelephonyManager#NETWORK_TYPE_GPRS},
-     * {@link TelephonyManager#NETWORK_TYPE_LTE}...
-     */
-    public static int getTelNetworkTypeINT(Context context) {
-        return getTelephonyManager(context).getNetworkType();
     }
 
     /**
@@ -303,6 +246,20 @@ public class NetworkUtils {
             default:
                 return NetWorkType.UnKnown;
         }
+    }
+
+    /**
+     * 获取ConnectivityManager
+     */
+    private static ConnectivityManager getConnectivityManager(Context context) {
+        return (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    }
+
+    /**
+     * 获取TelephonyManager
+     */
+    private static TelephonyManager getTelephonyManager(Context context) {
+        return (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
     }
 
 }

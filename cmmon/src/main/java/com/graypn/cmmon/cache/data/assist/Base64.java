@@ -19,7 +19,7 @@ package com.graypn.cmmon.cache.data.assist;
 import java.io.UnsupportedEncodingException;
 
 /**
- * Utilities for encoding and decoding the Base64 representation of
+ * Utilities for encoding and decoding the Base64Utils representation of
  * binary data.  See RFCs <a
  * href="http://www.ietf.org/rfc/rfc2045.txt">2045</a> and <a
  * href="http://www.ietf.org/rfc/rfc3548.txt">3548</a>.
@@ -51,7 +51,7 @@ public class Base64 {
 
     /**
      * Encoder/decoder flag bit to indicate using the "URL and
-     * filename safe" variant of Base64 (see RFC 3548 section 4) where
+     * filename safe" variant of Base64Utils (see RFC 3548 section 4) where
      * {@code -} and {@code _} are used in place of {@code +} and
      * {@code /}.
      */
@@ -100,7 +100,7 @@ public class Base64 {
     //  --------------------------------------------------------
 
     /**
-     * Decode the Base64-encoded data in input and return the data in
+     * Decode the Base64Utils-encoded data in input and return the data in
      * a new byte array.
      *
      * <p>The padding '=' characters at the end are considered optional, but
@@ -109,7 +109,7 @@ public class Base64 {
      * @param str    the input String to decode, which is converted to
      *               bytes using the default charset
      * @param flags  controls certain features of the decoded output.
-     *               Pass {@code DEFAULT} to decode standard Base64.
+     *               Pass {@code DEFAULT} to decode standard Base64Utils.
      *
      * @throws IllegalArgumentException if the input contains
      * incorrect padding
@@ -119,7 +119,7 @@ public class Base64 {
     }
 
     /**
-     * Decode the Base64-encoded data in input and return the data in
+     * Decode the Base64Utils-encoded data in input and return the data in
      * a new byte array.
      *
      * <p>The padding '=' characters at the end are considered optional, but
@@ -127,7 +127,7 @@ public class Base64 {
      *
      * @param input the input array to decode
      * @param flags  controls certain features of the decoded output.
-     *               Pass {@code DEFAULT} to decode standard Base64.
+     *               Pass {@code DEFAULT} to decode standard Base64Utils.
      *
      * @throws IllegalArgumentException if the input contains
      * incorrect padding
@@ -137,7 +137,7 @@ public class Base64 {
     }
 
     /**
-     * Decode the Base64-encoded data in input and return the data in
+     * Decode the Base64Utils-encoded data in input and return the data in
      * a new byte array.
      *
      * <p>The padding '=' characters at the end are considered optional, but
@@ -147,7 +147,7 @@ public class Base64 {
      * @param offset the position within the input array at which to start
      * @param len    the number of bytes of input to decode
      * @param flags  controls certain features of the decoded output.
-     *               Pass {@code DEFAULT} to decode standard Base64.
+     *               Pass {@code DEFAULT} to decode standard Base64Utils.
      *
      * @throws IllegalArgumentException if the input contains
      * incorrect padding
@@ -176,7 +176,7 @@ public class Base64 {
     /* package */ static class Decoder extends Coder {
         /**
          * Lookup table for turning bytes into their position in the
-         * Base64 alphabet.
+         * Base64Utils alphabet.
          */
         private static final int DECODE[] = {
             -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
@@ -443,7 +443,7 @@ public class Base64 {
     //  --------------------------------------------------------
 
     /**
-     * Base64-encode the given data and return a newly allocated
+     * Base64Utils-encode the given data and return a newly allocated
      * String with the result.
      *
      * @param input  the data to encode
@@ -461,7 +461,7 @@ public class Base64 {
     }
 
     /**
-     * Base64-encode the given data and return a newly allocated
+     * Base64Utils-encode the given data and return a newly allocated
      * String with the result.
      *
      * @param input  the data to encode
@@ -482,7 +482,7 @@ public class Base64 {
     }
 
     /**
-     * Base64-encode the given data and return a newly allocated
+     * Base64Utils-encode the given data and return a newly allocated
      * byte[] with the result.
      *
      * @param input  the data to encode
@@ -495,7 +495,7 @@ public class Base64 {
     }
 
     /**
-     * Base64-encode the given data and return a newly allocated
+     * Base64Utils-encode the given data and return a newly allocated
      * byte[] with the result.
      *
      * @param input  the data to encode
@@ -548,7 +548,7 @@ public class Base64 {
         public static final int LINE_GROUPS = 19;
 
         /**
-         * Lookup table for turning Base64 alphabet positions (6 bits)
+         * Lookup table for turning Base64Utils alphabet positions (6 bits)
          * into output bytes.
          */
         private static final byte ENCODE[] = {
@@ -559,7 +559,7 @@ public class Base64 {
         };
 
         /**
-         * Lookup table for turning Base64 alphabet positions (6 bits)
+         * Lookup table for turning Base64Utils alphabet positions (6 bits)
          * into output bytes.
          */
         private static final byte ENCODE_WEBSAFE[] = {

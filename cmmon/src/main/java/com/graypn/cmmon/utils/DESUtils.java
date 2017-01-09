@@ -4,12 +4,15 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
+
 import java.security.SecureRandom;
 
 /**
+ * DES 加密解密工具类
+ * <p>
  * Created by graypn on 16/9/13.
  */
-public class DexUtils {
+public class DESUtils {
 
     public static String password = "1566028820109132570743325311898426347857298773549468758875018579537757772163084478873699447306034466200616411960574122434059469100235892702736860872901247123456";
 
@@ -31,7 +34,7 @@ public class DexUtils {
         String encryptStr = str;
         byte[] bytes = encrypt(str.getBytes(), password);
         if (bytes != null) {
-            encryptStr = Base64.encode(bytes);
+            encryptStr = Base64Utils.encode(bytes);
         }
         return encryptStr;
     }
@@ -42,7 +45,7 @@ public class DexUtils {
         }
         String decryptStr;
         try {
-            decryptStr = new String(decrypt(Base64.decode(str), password));
+            decryptStr = new String(decrypt(Base64Utils.decode(str), password));
         } catch (Exception e) {
             return "wrong key";
         }

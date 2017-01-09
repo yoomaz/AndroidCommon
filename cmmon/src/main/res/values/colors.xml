@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#CF2D30</color>
     <color name="colorAccent">#FC4046</color>
 
-    <color name="actionbar">#FC4046</color>
+    <color name="actionbar">#FDFCFC</color>
     <color name="pstsIndicatorColor">#FC4046</color>
     <color name="pstsTextColorSelected">#FC4046</color>
     <color name="pstsTextColorNormal">#90222222</color>

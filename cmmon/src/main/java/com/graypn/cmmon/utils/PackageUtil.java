@@ -134,25 +134,6 @@ public class PackageUtil {
     }
 
     /**
-     * 获取当前系统安装应用的默认位置
-     *
-     * @return APP_INSTALL_AUTO or APP_INSTALL_INTERNAL or APP_INSTALL_EXTERNAL.
-     */
-//    public static int getInstallLocation() {
-//        ShellUtil.CommandResult commandResult = ShellUtil.execCommand(
-//                "LD_LIBRARY_PATH=/vendor/lib:/system/lib pm get-install-location", false, true);
-//        if (commandResult.result == 0 && commandResult.responseMsg != null && commandResult.responseMsg.length() > 0) {
-//            try {
-//                return Integer.parseInt(commandResult.responseMsg.substring(0, 1));
-//            } catch (NumberFormatException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return APP_INSTALL_AUTO;
-//    }
-
-
-    /**
      * get app package info
      */
     public static PackageInfo getAppPackageInfo(Context context) {

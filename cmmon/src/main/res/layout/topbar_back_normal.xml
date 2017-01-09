@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="@color/actionbar" >
+    android:layout_height="50dp"
+    android:background="@color/actionbar">
 
     <ImageButton
         android:id="@+id/ib_topbar_left"
@@ -15,7 +15,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="10.0dip"
         android:scaleType="center"
-        android:src="@mipmap/arrow_topbar"/>
+        android:src="@drawable/btn_back" />
 
     <TextView
         android:id="@+id/tv_toptitle"
@@ -23,12 +23,12 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:ellipsize="end"
+        android:maxLines="1"
         android:maxWidth="200.0dip"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:singleLine="true"
-        android:text="石嘴山机关智慧党建"
-        android:textColor="@color/white"
+        android:text="Title"
+        android:textColor="@color/black_99"
         android:textSize="20.0sp" />
 
 

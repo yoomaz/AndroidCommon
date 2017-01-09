@@ -1,13 +1,61 @@
 package com.graypn.android_common;
 
+import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import com.graypn.cmmon.base.ui.activity.BaseActivity;
+import com.graypn.cmmon.utils.NoticeUtils;
+import com.graypn.cmmon.utils.VibrateUtils;
+import com.graypn.cmmon.utils.WebViewUtils;
+import com.wang.avi.AVLoadingIndicatorView;
+
+
+public class MainActivity extends BaseActivity {
+
+    AVLoadingIndicatorView av;
+    Button btn;
+
+    static int id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btn = (Button) findViewById(R.id.btn);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebViewUtils.launchWebActivity(MainActivity.this, "baidu", "http://www.baidu.com");
+            }
+        });
+    }
+
+    @Override
+    protected void initVariables(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    protected void initViews() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected boolean translucentStatusBar() {
+        return true;
     }
 }

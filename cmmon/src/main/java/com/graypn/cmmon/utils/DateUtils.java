@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * 关于时间处理的工具类
+ * 时间处理的工具类
  *
  * @author Grapn
  */
