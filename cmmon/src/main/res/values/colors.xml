@@ -37,5 +37,10 @@
     <color name="btn_default_light_pressed">#40ffffff</color>
 
     <color name="yellow">#FF9A0A</color>
-    <color name="transparent">#10000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="bg_webpopup_btn_nomal">#fff9f9f9</color>
+    <color name="bg_webpopup_btn_pressed">#ff0093eb</color>
+    <color name="mmp_text_color">#333333</color>
+    <color name="mmp_split_color">#ebebeb</color>
 </resources>

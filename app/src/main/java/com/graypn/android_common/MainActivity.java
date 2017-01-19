@@ -34,7 +34,8 @@ public class MainActivity extends BaseActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebViewUtils.launchWebActivity(MainActivity.this, "baidu", "http://www.baidu.com");
+//                WebViewUtils.launchWebActivity(MainActivity.this, "baidu", "http://www.baidu.com");
+                WebViewUtils.launchWebPopupActivity(MainActivity.this, "http://www.baidu.com");
             }
         });
     }

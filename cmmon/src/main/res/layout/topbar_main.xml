@@ -31,14 +31,14 @@
         android:textColor="@color/white"
         android:textSize="20.0sp" />
 
-    <ImageButton
-        android:id="@+id/ib_topbar_menu"
-        android:layout_width="@dimen/actionBarSize"
-        android:layout_height="@dimen/actionBarSize"
-        android:background="@drawable/btn_default_light"
-        android:src="@mipmap/ic_menu_white"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:scaleType="center" />
+    <!--<ImageButton-->
+        <!--android:id="@+id/ib_topbar_menu"-->
+        <!--android:layout_width="@dimen/actionBarSize"-->
+        <!--android:layout_height="@dimen/actionBarSize"-->
+        <!--android:background="@drawable/btn_default_light"-->
+        <!--android:src="@mipmap/ic_menu_white"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:scaleType="center" />-->
 
 </RelativeLayout>
