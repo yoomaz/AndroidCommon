@@ -1,5 +1,6 @@
 package com.graypn.cmmon.view.dialog;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,16 +16,16 @@ import com.graypn.cmmon.R;
 /**
  * Created by graypn on 15/12/21.
  */
-public class IFlyDialog extends Dialog {
+public class CommonDialog extends Dialog {
 
     private static final int TYPE_ALERT = 0;
     private static final int TYPE_PROGRESS = 1;
 
-    public IFlyDialog(Context context) {
+    public CommonDialog(Context context) {
         this(context, 0);
     }
 
-    public IFlyDialog(Context context, int themeResId) {
+    public CommonDialog(Context context, int themeResId) {
         super(context, themeResId);
     }
 
@@ -34,6 +35,7 @@ public class IFlyDialog extends Dialog {
         private String mNegativeButtonText;
         private OnClickListener positiveButtonClickListener;
         private OnClickListener negativeButtonClickListener;
+        private OnDismissListener onDismissListener;
 
         public AlertBuilder(Context context, String title, String message) {
             super(context, title, message);
@@ -51,9 +53,14 @@ public class IFlyDialog extends Dialog {
             return this;
         }
 
+        public AlertBuilder setOnDismissListener(OnDismissListener onDismissListener) {
+            this.onDismissListener = onDismissListener;
+            return this;
+        }
+
         @Override
-        public IFlyDialog build() {
-            final IFlyDialog dialog = new IFlyDialog(mContext, R.style.dialogStyle);
+        public CommonDialog build() {
+            final CommonDialog dialog = new CommonDialog(mContext, R.style.dialogStyle);
             dialog.setCanceledOnTouchOutside(false);
             View dialogView = inflater.inflate(R.layout.dialog_alert, null);
             if (!TextUtils.isEmpty(mTitle)) {
@@ -90,6 +97,9 @@ public class IFlyDialog extends Dialog {
             } else {
                 dialogView.findViewById(R.id.btn_cancel).setVisibility(View.GONE);
             }
+            if (onDismissListener != null) {
+                dialog.setOnDismissListener(onDismissListener);
+            }
             dialog.addContentView(dialogView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             return dialog;
         }
@@ -102,8 +112,8 @@ public class IFlyDialog extends Dialog {
         }
 
         @Override
-        public IFlyDialog build() {
-            final IFlyDialog dialog = new IFlyDialog(mContext, R.style.dialogStyle);
+        public CommonDialog build() {
+            final CommonDialog dialog = new CommonDialog(mContext, R.style.dialogStyle);
             dialog.setCanceledOnTouchOutside(false);
             View dialogView = inflater.inflate(R.layout.dialog_progress, null);
             if (!TextUtils.isEmpty(mTitle)) {
@@ -130,6 +140,6 @@ public class IFlyDialog extends Dialog {
             inflater = LayoutInflater.from(mContext);
         }
 
-        public abstract IFlyDialog build();
+        public abstract CommonDialog build();
     }
 }
