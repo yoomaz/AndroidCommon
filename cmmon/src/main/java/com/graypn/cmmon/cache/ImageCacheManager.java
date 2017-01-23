@@ -6,9 +6,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 /**
+ * 图片缓存管理：依赖 Glide 进行实现
  * Created by graypn on 16/1/7.
- * <p/>
- * 依赖 Glide 进行实现
  */
 public class ImageCacheManager {
 
@@ -28,9 +27,9 @@ public class ImageCacheManager {
     }
 
     public static void loadImage(String url, int defImg, ImageView imageView) {
-        if(url == null || url.equals("")){
+        if (url == null || url.equals("")) {
             Glide.with(mContext).load(defImg).into(imageView);
-        }else{
+        } else {
             if (mContext != null) {
                 Glide.with(mContext).load(url).placeholder(defImg).into(imageView);
             }
