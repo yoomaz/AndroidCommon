@@ -43,4 +43,19 @@
     <color name="bg_webpopup_btn_pressed">#ff0093eb</color>
     <color name="mmp_text_color">#333333</color>
     <color name="mmp_split_color">#ebebeb</color>
+
+    <!-- 自定义Dialog样式-->
+    <color name="custom_dialog_background_color">#ffffff</color>
+    <color name="custom_dialog_title_color">#333333</color>
+    <color name="custom_dialog_separator_color">#e6e7e8</color>
+    <color name="custom_dialog_content_color">#333333</color>
+    <color name="custom_dialog_ok_normal">#0093eb</color>
+    <color name="custom_dialog_cancel_normal">#333333</color>
+    <color name="custom_dialog_button_pressed">#0780cc</color>
+    <color name="custom_dialog_button_disable">#cccccc</color>
+    <color name="custom_dialog_item_bg_color_normal">#FFFFFFFF</color>
+    <color name="custom_dialog_item_bg_color_pressed">#ffdee0e1</color>
+    <color name="user_define_skin_normal_bg_color">#ffffffff</color>
+    <color name="user_define_skin_normal_color">#ff333333</color>
+    <color name="custom_notification_message_color">#999999</color>
 </resources>

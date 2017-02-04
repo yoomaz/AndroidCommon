@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 /**
+ * Toast 工具类，屏幕只出现一个Toast
+ *
  * Created by ZhuLei on 16/8/4.
  * Email: zhuleineuq@gmail.com
  */

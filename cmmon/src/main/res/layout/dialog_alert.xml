@@ -5,72 +5,73 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:minWidth="280dip"
+    android:background="@drawable/dialog_bg"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/dialog_title"
         android:layout_width="match_parent"
-        android:layout_height="35.0dip"
+        android:layout_height="60dp"
         android:gravity="center"
-        android:text="退出"
-        android:textColor="@android:color/black"
+        android:text="Title"
+        android:textColor="@color/custom_dialog_title_color"
         android:textSize="18.0sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1.0px"
-        android:background="#fffff0f5" />
+        android:layout_height="1px"
+        android:background="@color/custom_dialog_separator_color" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:minHeight="50.0dip"
-        android:orientation="horizontal">
+        android:minHeight="100dp">
 
         <TextView
             android:id="@+id/dialog_msg"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10.0dip"
-            android:gravity="center_horizontal"
-            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="Context"
+            android:textColor="@color/custom_dialog_content_color"
             android:textSize="15.0sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1.0px"
-        android:background="#ffd1d1d1" />
+        android:background="@color/custom_dialog_separator_color" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45.0dip"
-        android:orientation="horizontal">
+        android:layout_height="50dp">
 
         <Button
             android:id="@+id/btn_cancel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:background="@drawable/dialog_selector_left_btn"
+            android:layout_weight="1"
+            android:background="@color/transparent"
             android:text="取消"
-            android:textColor="@color/text_color_bright_blue" />
+            android:textColor="@drawable/dialog_btn_cancle" />
 
-        <LinearLayout
-            android:id="@+id/mLineImg"
-            android:layout_width="1.0px"
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="1px"
             android:layout_height="match_parent"
-            android:background="#ffd1d1d1"
-            android:orientation="vertical" />
+            android:background="@color/custom_dialog_separator_color" />
 
         <Button
             android:id="@+id/btn_confirm"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:background="@drawable/dialog_selector_right_btn"
+            android:layout_weight="1"
+            android:background="@color/transparent"
             android:text="确定"
-            android:textColor="@color/text_color_bright_blue" />
+            android:textColor="@drawable/dialog_btn_confirm" />
     </LinearLayout>
 </LinearLayout>

@@ -49,7 +49,9 @@ public class CommonPermissionListener implements PermissionListener {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void showPermissionRationale(final PermissionToken token) {
-        new CommonDialog.AlertBuilder(activity, dialogTitle, dialogMessage)
+        new CommonDialog.AlertBuilder(activity)
+                .setTitle(dialogTitle)
+                .setMessage(dialogMessage)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
@@ -57,7 +59,7 @@ public class CommonPermissionListener implements PermissionListener {
                         token.continuePermissionRequest();
                     }
                 })
-                .setNegativeButtonClickListener("取消", new DialogInterface.OnClickListener() {
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
                         dialog.dismiss();
