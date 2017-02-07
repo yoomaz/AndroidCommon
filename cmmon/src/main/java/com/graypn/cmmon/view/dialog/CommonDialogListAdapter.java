@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.graypn.cmmon.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

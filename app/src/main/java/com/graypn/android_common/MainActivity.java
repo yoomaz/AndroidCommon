@@ -8,6 +8,7 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.graypn.cmmon.base.ui.activity.BaseActivity;
+import com.graypn.cmmon.net.NetManager;
+import com.graypn.cmmon.net.okhttp.DownloadCallBack;
 import com.graypn.cmmon.permission.OnPermissionListener;
 import com.graypn.cmmon.permission.PermissionHelper;
 import com.graypn.cmmon.utils.NoticeUtils;
@@ -25,6 +28,7 @@ import com.graypn.cmmon.utils.WebViewUtils;
 import com.graypn.cmmon.view.dialog.CommonDialog;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,24 +43,45 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        NetManager.init(this);
+
         btn = (Button) findViewById(R.id.btn);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<String> list = new ArrayList<String>();
-                list.add("item01");
-                list.add("item02");
 
-                Dialog dialog = new CommonDialog.ListBuilder(MainActivity.this)
-                        .setTitle("温馨提示")
-                        .setContentList(list, new DialogInterface.OnClickListener() {
+                NetManager.download("http://download.voicecloud.cn/100IME/iFlyIME_v7.0.4405.apk",
+                        Environment.getExternalStorageDirectory().toString(), "test.apk", new DownloadCallBack() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ToastUtils.showToast(MainActivity.this, which + "");
+                            public void onFinish(File file) {
+                                ToastUtils.showToast(MainActivity.this, "ok");
                             }
-                        }).build();
-                dialog.show();
+
+                            @Override
+                            public void onProgress(long currentBytes, long totalBytes) {
+                                int progress = (int) ((currentBytes * 100) / totalBytes);
+                                Log.i("progress", "progress" + progress);
+                            }
+
+                            @Override
+                            public void onFailure(String error) {
+                                ToastUtils.showToast(MainActivity.this, error);
+                            }
+                        });
+//                List<String> list = new ArrayList<String>();
+//                list.add("item01");
+//                list.add("item02");
+//
+//                Dialog dialog = new CommonDialog.ListBuilder(MainActivity.this)
+//                        .setTitle("温馨提示")
+//                        .setContentList(list, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                ToastUtils.showToast(MainActivity.this, which + "");
+//                            }
+//                        }).build();
+//                dialog.show();
 
 
 //                Dialog dialog = new CommonDialog.AlertBuilder(MainActivity.this)

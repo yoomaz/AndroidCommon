@@ -81,6 +81,48 @@ public final class FileUtils {
     }
 
     /**
+     * 保存文件
+     */
+    public static File saveFile(String filePath, String fileName, InputStream inputStream) {
+        if (inputStream == null || TextUtils.isEmpty(filePath) || TextUtils.isEmpty(fileName)) {
+            return null;
+        }
+        File dirFile = new File(filePath);
+        boolean mkdirsResult;
+        if (!dirFile.exists()) {
+            mkdirsResult = dirFile.mkdirs();
+        } else {
+            mkdirsResult = true;
+        }
+        if (mkdirsResult) {
+            File file = new File(dirFile, fileName);
+            FileOutputStream fos = null;
+            byte[] buff = new byte[2048];
+            int len;
+            try {
+                fos = new FileOutputStream(file);
+                while ((len = inputStream.read(buff)) != -1) {
+                    fos.write(buff, 0, len);
+                }
+                fos.flush();
+                return file;
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    inputStream.close();
+                    if (fos != null) {
+                        fos.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * 文件转换为二进制数组
      */
     public static byte[] readFileIntoByte(File file) {

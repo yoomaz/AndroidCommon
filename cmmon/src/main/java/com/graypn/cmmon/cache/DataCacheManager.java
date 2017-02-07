@@ -5,7 +5,7 @@ import android.content.Context;
 import com.orhanobut.hawk.Hawk;
 
 /**
- * 图片缓存管理：依赖 Glide 进行实现
+ * 数据缓存管理：依赖 Hawk 进行实现
  *
  * Created by ZhuLei on 2017/1/21.
  * Email: zhuleineuq@gmail.com
