@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.graypn.cmmon.assist.update.UpdateService;
 import com.graypn.cmmon.base.ui.activity.BaseActivity;
 import com.graypn.cmmon.net.NetManager;
 import com.graypn.cmmon.net.okhttp.DownloadCallBack;
@@ -38,6 +39,8 @@ public class MainActivity extends BaseActivity {
     AVLoadingIndicatorView av;
     Button btn;
 
+    private boolean isOpen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,24 +54,33 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                NetManager.download("http://download.voicecloud.cn/100IME/iFlyIME_v7.0.4405.apk",
-                        Environment.getExternalStorageDirectory().toString(), "test.apk", new DownloadCallBack() {
-                            @Override
-                            public void onFinish(File file) {
-                                ToastUtils.showToast(MainActivity.this, "ok");
-                            }
+                Intent intent = new Intent(MainActivity.this, UpdateService.class);
+                if (isOpen){
+                    stopService(intent);
+                } else {
+                    startService(intent);
+                }
 
-                            @Override
-                            public void onProgress(long currentBytes, long totalBytes) {
-                                int progress = (int) ((currentBytes * 100) / totalBytes);
-                                Log.i("progress", "progress" + progress);
-                            }
 
-                            @Override
-                            public void onFailure(String error) {
-                                ToastUtils.showToast(MainActivity.this, error);
-                            }
-                        });
+//                NetManager.download("http://download.voicecloud.cn/100IME/iFlyIME_v7.0.4405.apk",
+//                        Environment.getExternalStorageDirectory().toString(), "test.apk", new DownloadCallBack() {
+//                            @Override
+//                            public void onFinish(File file) {
+//                                ToastUtils.showToast(MainActivity.this, "ok");
+//                            }
+//
+//                            @Override
+//                            public void onProgress(long currentBytes, long totalBytes) {
+//                                int progress = (int) ((currentBytes * 100) / totalBytes);
+//                                Log.i("progress", "progress" + progress);
+//                            }
+//
+//                            @Override
+//                            public void onFailure(String error) {
+//                                ToastUtils.showToast(MainActivity.this, error);
+//                            }
+//                        });
+
 //                List<String> list = new ArrayList<String>();
 //                list.add("item01");
 //                list.add("item02");

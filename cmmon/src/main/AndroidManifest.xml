@@ -28,7 +28,9 @@
             android:name=".view.webpage.WebPopupActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
-            android:theme="@style/transparentDialogStyle"/>
+            android:theme="@style/transparentDialogStyle" />
+
+        <service android:name=".assist.update.UpdateService" />
     </application>
 
 </manifest>

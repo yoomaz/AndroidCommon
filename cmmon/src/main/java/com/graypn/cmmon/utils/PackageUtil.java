@@ -11,6 +11,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.widget.Toast;
@@ -274,6 +275,13 @@ public class PackageUtil {
                     Toast.LENGTH_LONG).show();
         }
         return false;
+    }
+
+    /**
+     * 获取SD卡路径
+     */
+    public static String getSDCardPath() {
+        return Environment.getExternalStorageDirectory().toString();
     }
 
 }
