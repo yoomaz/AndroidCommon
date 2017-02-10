@@ -281,7 +281,10 @@ public class PackageUtil {
      * 获取SD卡路径
      */
     public static String getSDCardPath() {
-        return Environment.getExternalStorageDirectory().toString();
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            return Environment.getExternalStorageDirectory().toString();
+        }
+        return null;
     }
 
 }
