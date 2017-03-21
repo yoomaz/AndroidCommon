@@ -1,23 +1,17 @@
 package com.graypn.cmmon.permission;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.util.Log;
 
 import com.graypn.cmmon.base.ui.activity.BaseActivity;
+import com.graypn.cmmon.permission.permissionmaster.PermissionMaster;
+import com.graypn.cmmon.permission.permissionmaster.listener.PermissionListener;
 import com.graypn.cmmon.view.dialog.CommonDialog;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.DexterError;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.PermissionRequestErrorListener;
-import com.karumi.dexter.listener.single.CompositePermissionListener;
-import com.karumi.dexter.listener.single.PermissionListener;
+import com.graypn.cmmon.view.dialog.CommonDialogHelper;
+
+import org.w3c.dom.Comment;
 
 /**
  * Created by ZhuLei on 2017/1/20.
@@ -26,20 +20,23 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 public class PermissionHelper {
 
-    public static void requestPermission(final BaseActivity activity, final OnPermissionListener permissionListener, final String permission, final String dialogTitle, final String dialogMessage) {
-        Dexter.withActivity(activity)
-                .withPermission(permission)
-                .withListener(new CompositePermissionListener(new CommonPermissionListener(activity, permissionListener, dialogTitle, dialogMessage)))
-                .withErrorListener(new PermissionRequestErrorListener() {
-                    @Override
-                    public void onError(DexterError error) {
-                        permissionListener.onError();
-                    }
-                })
-                .check();
+    public static void requestPermission(final BaseActivity activity, final PermissionListener permissionListener, final String permission, final String dialogTitle, final String dialogMessage) {
+        CommonDialogHelper.getCommonAlertDialog(activity, dialogTitle, dialogMessage, "确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                PermissionMaster.withActivity(activity)
+                        .withPermission(permission)
+                        .withListener(permissionListener)
+                        .check();
+            }
+        }, "取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).show();
     }
 
-    @TargetApi(23)
     public static boolean checkPermission(Context context, String permission) {
         boolean status = false;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {

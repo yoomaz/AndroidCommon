@@ -30,6 +30,10 @@
             android:launchMode="singleInstance"
             android:theme="@style/transparentDialogStyle" />
 
+        <activity android:name=".permission.permissionmaster.PermissionMasterActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.Transparent"/>
+
         <service android:name=".assist.update.UpdateService" />
     </application>
 

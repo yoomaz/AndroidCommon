@@ -12,7 +12,7 @@ import java.security.SecureRandom;
  * <p>
  * Created by graypn on 16/9/13.
  */
-public class DESUtils {
+public class EncryptionUtils {
 
     public static String password = "1566028820109132570743325311898426347857298773549468758875018579537757772163084478873699447306034466200616411960574122434059469100235892702736860872901247123456";
 
@@ -45,7 +45,9 @@ public class DESUtils {
         }
         String decryptStr;
         try {
-            decryptStr = new String(decrypt(Base64Utils.decode(str), password));
+            // 因为这个加密后 str 是 Base64Utils 编码的，所以要 Base64Utils 解码
+            byte[] bytes = Base64Utils.decode(str);
+            decryptStr = new String(decrypt(bytes, password));
         } catch (Exception e) {
             return "wrong key";
         }

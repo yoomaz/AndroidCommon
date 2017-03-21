@@ -19,24 +19,28 @@ import com.graypn.cmmon.assist.update.UpdateService;
 import com.graypn.cmmon.base.ui.activity.BaseActivity;
 import com.graypn.cmmon.net.NetManager;
 import com.graypn.cmmon.net.okhttp.DownloadCallBack;
-import com.graypn.cmmon.permission.OnPermissionListener;
 import com.graypn.cmmon.permission.PermissionHelper;
+import com.graypn.cmmon.permission.permissionmaster.listener.PermissionListener;
+import com.graypn.cmmon.permission.permissionmaster.model.PermissionDeniedResponse;
+import com.graypn.cmmon.permission.permissionmaster.model.PermissionGrantedResponse;
+import com.graypn.cmmon.utils.IniParseUtils;
 import com.graypn.cmmon.utils.NoticeUtils;
 import com.graypn.cmmon.utils.StringUtils;
 import com.graypn.cmmon.utils.ToastUtils;
 import com.graypn.cmmon.utils.VibrateUtils;
 import com.graypn.cmmon.utils.WebViewUtils;
 import com.graypn.cmmon.view.dialog.CommonDialog;
-import com.wang.avi.AVLoadingIndicatorView;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
 
-    AVLoadingIndicatorView av;
     Button btn;
 
     private boolean isOpen;
@@ -46,6 +50,9 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        String pkgName = getPackageName();
+        Log.i("MainActivity", pkgName);
+
         NetManager.init(this);
 
         btn = (Button) findViewById(R.id.btn);
@@ -54,12 +61,15 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this, UpdateService.class);
-                if (isOpen){
-                    stopService(intent);
-                } else {
-                    startService(intent);
-                }
+                testPermission();
+//                HashMap<String, HashMap<String, String>> hashMap = IniParseUtils.parseIni(MainActivity.this, "logo.ini");
+//                Log.i("a", hashMap.size() + "");
+//                Intent intent = new Intent(MainActivity.this, UpdateService.class);
+//                if (isOpen) {
+//                    stopService(intent);
+//                } else {
+//                    startService(intent);
+//                }
 
 
 //                NetManager.download("http://download.voicecloud.cn/100IME/iFlyIME_v7.0.4405.apk",
@@ -139,26 +149,23 @@ public class MainActivity extends BaseActivity {
 
     void testPermission() {
         PermissionHelper.requestPermission(MainActivity.this,
-                new OnPermissionListener() {
+                new PermissionListener() {
                     @Override
-                    public void onPermissionGranted() {
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
                         Log.i("MainActivity", "onPermissionGranted");
                     }
 
                     @Override
-                    public void onPermissionDenied() {
-                        Log.i("MainActivity", "onPermissionDenied");
-                    }
-
-                    @Override
-                    public void onError() {
-                        Log.i("MainActivity", "onError");
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        Log.i("MainActivity", "onPermissionDenied:" + response.isPermanentlyDenied());
                     }
                 },
                 Manifest.permission.CAMERA,
                 "请求权限",
                 "必须答应");
     }
+
+
 
     void tetsWebActivity() {
         //                WebViewUtils.launchWebActivity(MainActivity.this, "baidu", "http://www.baidu.com");
