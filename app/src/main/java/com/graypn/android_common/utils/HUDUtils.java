@@ -1,4 +1,4 @@
-package com.graypn.cmmon.utils;
+package com.graypn.android_common.utils;
 
 import android.content.Context;
 

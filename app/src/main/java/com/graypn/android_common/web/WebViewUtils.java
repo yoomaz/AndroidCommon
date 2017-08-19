@@ -1,10 +1,7 @@
-package com.graypn.cmmon.utils;
+package com.graypn.android_common.web;
 
 import android.content.Context;
 import android.content.Intent;
-
-import com.graypn.cmmon.view.webpage.WebActivity;
-import com.graypn.cmmon.view.webpage.WebPopupActivity;
 
 /**
  * Created by ZhuLei on 2017/1/6.

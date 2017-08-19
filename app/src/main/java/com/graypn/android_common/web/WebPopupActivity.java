@@ -1,18 +1,13 @@
-package com.graypn.cmmon.view.webpage;
+package com.graypn.android_common.web;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.graypn.cmmon.R;
 import com.graypn.cmmon.base.ui.activity.BaseActivity;

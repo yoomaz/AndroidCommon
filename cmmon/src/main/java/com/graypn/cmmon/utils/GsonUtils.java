@@ -9,7 +9,8 @@ import java.util.Map;
 /**
  * 封装Gson
  *
- * @author Graypn
+ * Created by ZhuLei on 2017/1/6.
+ * Email: zhuleineuq@gmail.com
  */
 public class GsonUtils {
 

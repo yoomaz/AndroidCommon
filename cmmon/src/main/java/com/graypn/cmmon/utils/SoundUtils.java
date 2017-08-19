@@ -11,7 +11,7 @@ import android.os.Build;
  * Email: zhuleineuq@gmail.com
  */
 
-public class NoticeUtils {
+public class SoundUtils {
 
     private static SoundPool mPool;
 

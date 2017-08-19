@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -39,8 +40,19 @@ public class PackageUtil {
             return false;
         }
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri apkUri;
+        // Android 7.0 以上不支持 file://协议 需要通过 FileProvider 访问 sd卡 下面的文件，所以 Uri 需要通过 FileProvider 构造，协议为 content://
+        if (Build.VERSION.SDK_INT >= 24) {
+            // content:// 协议
+            apkUri = FileProvider.getUriForFile(context, "com.graypn.android_common.fileProvider", file);
+            //Granting Temporary Permissions to a URI
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        } else {
+            // file:// 协议
+            apkUri = Uri.fromFile(file);
+        }
+        intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
         context.startActivity(intent);
         return true;
     }

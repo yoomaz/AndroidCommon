@@ -21,18 +21,14 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".view.webpage.WebActivity"
+            android:name="com.graypn.android_common.web.WebActivity"
             android:launchMode="singleInstance" />
 
         <activity
-            android:name=".view.webpage.WebPopupActivity"
+            android:name="com.graypn.android_common.web.WebPopupActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:theme="@style/transparentDialogStyle" />
-
-        <activity android:name=".permission.permissionmaster.PermissionMasterActivity"
-            android:launchMode="singleInstance"
-            android:theme="@style/Theme.Transparent"/>
 
         <service android:name=".assist.update.UpdateService" />
     </application>

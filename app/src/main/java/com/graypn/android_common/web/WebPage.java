@@ -1,4 +1,4 @@
-package com.graypn.cmmon.view.webpage;
+package com.graypn.android_common.web;
 
 import android.content.Context;
 import android.graphics.Bitmap;

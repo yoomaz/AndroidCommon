@@ -1,47 +1,31 @@
 package com.graypn.android_common;
 
 import android.Manifest;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.os.Build;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
-import com.graypn.cmmon.assist.update.UpdateService;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.graypn.cmmon.base.ui.activity.BaseActivity;
 import com.graypn.cmmon.net.NetManager;
-import com.graypn.cmmon.net.okhttp.DownloadCallBack;
 import com.graypn.cmmon.permission.PermissionHelper;
-import com.graypn.cmmon.permission.permissionmaster.listener.PermissionListener;
-import com.graypn.cmmon.permission.permissionmaster.model.PermissionDeniedResponse;
-import com.graypn.cmmon.permission.permissionmaster.model.PermissionGrantedResponse;
-import com.graypn.cmmon.utils.IniParseUtils;
-import com.graypn.cmmon.utils.NoticeUtils;
-import com.graypn.cmmon.utils.StringUtils;
-import com.graypn.cmmon.utils.ToastUtils;
-import com.graypn.cmmon.utils.VibrateUtils;
-import com.graypn.cmmon.utils.WebViewUtils;
-import com.graypn.cmmon.view.dialog.CommonDialog;
+import com.graypn.cmmon.utils.PackageUtil;
+import com.graypn.android_common.web.WebViewUtils;
+import com.graypn.permissionmaster.listener.PermissionListener;
+import com.graypn.permissionmaster.model.PermissionDeniedResponse;
+import com.graypn.permissionmaster.model.PermissionGrantedResponse;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
 
     Button btn;
+    ImageView img;
 
     private boolean isOpen;
 
@@ -56,12 +40,19 @@ public class MainActivity extends BaseActivity {
         NetManager.init(this);
 
         btn = (Button) findViewById(R.id.btn);
+        img = (ImageView) findViewById(R.id.img);
+        Glide.with(this).load(R.drawable.ic_gif).into(new GlideDrawableImageViewTarget(img, 1));
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                testPermission();
+                testCountDownTimer();
+
+//                testInstall();
+
+//                testPermission();
+
 //                HashMap<String, HashMap<String, String>> hashMap = IniParseUtils.parseIni(MainActivity.this, "logo.ini");
 //                Log.i("a", hashMap.size() + "");
 //                Intent intent = new Intent(MainActivity.this, UpdateService.class);
@@ -76,6 +67,7 @@ public class MainActivity extends BaseActivity {
 //                        Environment.getExternalStorageDirectory().toString(), "test.apk", new DownloadCallBack() {
 //                            @Override
 //                            public void onFinish(File file) {
+//                                PackageUtil.install(MainActivity.this, file);
 //                                ToastUtils.showToast(MainActivity.this, "ok");
 //                            }
 //
@@ -125,6 +117,33 @@ public class MainActivity extends BaseActivity {
 //                dialog.show();
             }
         });
+    }
+
+    private void testCountDownTimer() {
+        CountDownTimer timer = new CountDownTimer(30000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                Log.i("MainActivity", "seconds remaining: " + millisUntilFinished / 1000);
+            }
+
+            @Override
+            public void onFinish() {
+                Log.i("MainActivity", "onFinish");
+            }
+        };
+        timer.start();
+    }
+
+
+    // 测试安装Apk
+    private void testInstall() {
+        String filePath = PackageUtil.getSDCardPath() + "/" + "szssmartparty.apk";
+        File file = new File(filePath);
+
+        if (file.exists()) {
+            PackageUtil.install(this, file);
+        }
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.graypn.cmmon.utils.ToastUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -33,10 +34,10 @@ import okhttp3.Response;
 public class NetManager {
 
     private static final OkHttpClient mOkHttpClient = new OkHttpClient();
-    private static Context mContext;
+    private static WeakReference<Context> mContext;
 
     public static void init(Context context) {
-        mContext = context;
+        mContext = new WeakReference<>(context);
     }
 
     /**
@@ -45,7 +46,7 @@ public class NetManager {
      * Get方式
      */
     public static String getData(String url) throws IOException {
-        if (NetworkUtils.isConnected(mContext)) {
+        if (NetworkUtils.isConnected(mContext.get())) {
             Request request = new Request
                     .Builder()
                     .url(url)
@@ -59,7 +60,7 @@ public class NetManager {
                 throw new IOException("Unexpected code " + response);
             }
         } else {
-            ToastUtils.showToast(mContext, "网络未连接");
+            ToastUtils.showToast(mContext.get(), "网络未连接");
             return null;
         }
     }
@@ -70,14 +71,14 @@ public class NetManager {
      * Get方式
      */
     public static void getDataAsync(String url, Callback responseCallback) {
-        if (NetworkUtils.isConnected(mContext)) {
+        if (NetworkUtils.isConnected(mContext.get())) {
             Request request = new Request.Builder()
                     .url(url)
                     .build();
             mOkHttpClient.newCall(request)
                     .enqueue(responseCallback);
         } else {
-            ToastUtils.showToast(mContext, "网络未连接");
+            ToastUtils.showToast(mContext.get(), "网络未连接");
         }
     }
 
@@ -87,7 +88,7 @@ public class NetManager {
      * POST方式
      */
     public static void getDataAsyncInPost(String url, Map<String, String> params, Callback responseCallback) {
-        if (NetworkUtils.isConnected(mContext)) {
+        if (NetworkUtils.isConnected(mContext.get())) {
             FormBody.Builder builder = new FormBody.Builder();
             if (params != null) {
                 for (String key : params.keySet()) {
@@ -102,12 +103,12 @@ public class NetManager {
             mOkHttpClient.newCall(request)
                     .enqueue(responseCallback);
         } else {
-            ToastUtils.showToast(mContext, "网络未连接");
+            ToastUtils.showToast(mContext.get(), "网络未连接");
         }
     }
 
     public static void download(String url, String filePath, String fileName, final DownloadCallBack callBack) {
-        if (NetworkUtils.isConnected(mContext)) {
+        if (NetworkUtils.isConnected(mContext.get())) {
             Request request = new Request.Builder()
                     .url(url)
                     .build();
@@ -125,7 +126,7 @@ public class NetManager {
                     .newCall(request)
                     .enqueue(new OkhttpDownloadCallBack(filePath, fileName, new Handler(), callBack));
         } else {
-            ToastUtils.showToast(mContext, "网络未连接");
+            ToastUtils.showToast(mContext.get(), "网络未连接");
         }
     }
 

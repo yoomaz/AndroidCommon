@@ -6,12 +6,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 
 import com.graypn.cmmon.base.ui.activity.BaseActivity;
-import com.graypn.cmmon.permission.permissionmaster.PermissionMaster;
-import com.graypn.cmmon.permission.permissionmaster.listener.PermissionListener;
-import com.graypn.cmmon.view.dialog.CommonDialog;
 import com.graypn.cmmon.view.dialog.CommonDialogHelper;
-
-import org.w3c.dom.Comment;
+import com.graypn.permissionmaster.PermissionMaster;
+import com.graypn.permissionmaster.listener.PermissionListener;
 
 /**
  * Created by ZhuLei on 2017/1/20.

@@ -1,0 +1,64 @@
+// 兼容库版本
+def supportVersion = "25.3.1"
+// retrofit 版本
+def retrofitVersion = "2.2.0"
+// okHttp 版本
+def okHttpVersion = "3.7.0"
+// stetho 版本
+def stethoVersion = "1.5.0"
+// butterKnife 版本
+def butterKnifeVersion = "8.5.1"
+// glide 版本
+def glideVersion = "3.7.0"
+
+project.ext {
+    android = [
+            compileSdkVersion: 25,
+            buildToolsVersion: '25.0.2',
+            applicationId    : "com.graypn.android_common",
+            minSdkVersion    : 15,
+            targetSdkVersion : 25,
+            versionCode      : 1,
+            versionName      : "1.0"
+    ]
+
+    dependencies = [
+            // android-support
+            "support-v4"                 : "com.android.support:support-v4:${supportVersion}",
+            "appcompat-v7"               : "com.android.support:appcompat-v7:${supportVersion}",
+            "design"                     : "com.android.support:design:${supportVersion}",
+            "recyclerview"               : "com.android.support:recyclerview-v7:${supportVersion}",
+            "cardview"                   : "com.android.support:cardview-v7:${supportVersion}",
+
+            // rx
+            "rxjava2"                    : "io.reactivex.rxjava2:rxjava:2.1.0",
+            "rxandroid"                  : "io.reactivex:rxandroid:1.2.1",
+
+            // retrofit
+            "retrofit2"                  : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            "retrofit2-adapter-rxjava"   : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+            "retrofit2-converter-gson"   : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+
+            // facebook
+            "stetho"                     : "com.facebook.stetho:stetho:${stethoVersion}",
+            "stetho-okhttp3"             : "com.facebook.stetho:stetho-okhttp3:${stethoVersion}",
+
+            // butterknife
+            "butterknife"                : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            "butterknife-compiler"       : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+
+            // okhttp3
+            "okhttp3"                    : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            "okhttp3-logging-interceptor": "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+
+            // glide
+            "glide"                      : "com.github.bumptech.glide:glide:${glideVersion}",
+
+            // other
+            "ormlite"                    : "com.j256.ormlite:ormlite-android:4.48",
+            "hawk"                       : "com.orhanobut:hawk:2.0.1",
+            "gson"                       : "com.google.code.gson:gson:2.7",
+            "permissionMaster"           : "com.graypn:permissionmaster:0.8.0",
+
+    ]
+}
