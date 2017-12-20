@@ -2,6 +2,7 @@
     package="com.graypn.cmmon">
 
     <!--获取手机串号 IMEI-->
+    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!--获取手机 MAC地址-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />

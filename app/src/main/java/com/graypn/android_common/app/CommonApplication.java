@@ -1,4 +1,4 @@
-package com.graypn.android_common;
+package com.graypn.android_common.app;
 
 import com.graypn.cmmon.base.application.BaseApplication;
 import com.tencent.smtt.sdk.QbSdk;
@@ -8,7 +8,7 @@ import com.tencent.smtt.sdk.QbSdk;
  * Email: zhuleineuq@gmail.com
  */
 
-public class DemoApplication extends BaseApplication {
+public class CommonApplication extends BaseApplication {
 
     @Override
     public void onCreate() {

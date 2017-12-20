@@ -7,6 +7,8 @@ import android.media.SoundPool;
 import android.os.Build;
 
 /**
+ * 播放声音工具类
+ * <p>
  * Created by ZhuLei on 2016/9/28.
  * Email: zhuleineuq@gmail.com
  */

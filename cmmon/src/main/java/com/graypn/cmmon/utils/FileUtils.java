@@ -15,7 +15,7 @@ public final class FileUtils {
     /**
      * 获取文件后缀名
      */
-    public static String getExtension(final String fileName) {
+    public static String getFileExtension(final String fileName) {
         int dot = fileName.lastIndexOf(".");
         if (dot > 0) {
             return fileName.substring(dot + 1);
@@ -27,7 +27,7 @@ public final class FileUtils {
     /**
      * 获取文件名
      */
-    public static String getBaseName(final String fileName) {
+    public static String getFileBaseName(final String fileName) {
         int dot = fileName.lastIndexOf(".");
         if (dot > 0) {
             return fileName.substring(0, dot);

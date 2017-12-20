@@ -8,18 +8,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.graypn.android_common.web.WebViewUtils;
 import com.graypn.cmmon.base.ui.activity.BaseActivity;
 import com.graypn.cmmon.net.NetManager;
 import com.graypn.cmmon.permission.PermissionHelper;
+import com.graypn.cmmon.system.user.ContactHelper;
+import com.graypn.cmmon.system.user.bean.CallRecord;
+import com.graypn.cmmon.system.user.bean.ContactInfo;
+import com.graypn.cmmon.system.user.bean.SmsInfo;
 import com.graypn.cmmon.utils.PackageUtil;
-import com.graypn.android_common.web.WebViewUtils;
 import com.graypn.permissionmaster.listener.PermissionListener;
 import com.graypn.permissionmaster.model.PermissionDeniedResponse;
 import com.graypn.permissionmaster.model.PermissionGrantedResponse;
 
 import java.io.File;
+import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
@@ -41,13 +44,15 @@ public class MainActivity extends BaseActivity {
 
         btn = (Button) findViewById(R.id.btn);
         img = (ImageView) findViewById(R.id.img);
-        Glide.with(this).load(R.drawable.ic_gif).into(new GlideDrawableImageViewTarget(img, 1));
+//        Glide.with(this).load(R.drawable.ic_gif).into(new GlideDrawableImageViewTarget(img, 1));
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                testCountDownTimer();
+//                NetworkUtils.testCurrentNetInfo(MainActivity.this);
+
+//                testCountDownTimer();
 
 //                testInstall();
 
@@ -115,9 +120,20 @@ public class MainActivity extends BaseActivity {
 //                        })
 //                        .build();
 //                dialog.show();
+
+                List<ContactInfo> list = ContactHelper.getContacts(getApplicationContext());
+
+                List<CallRecord> list2 = ContactHelper.getCallLogs(getApplicationContext());
+
+                List<SmsInfo> list3 = ContactHelper.getSmsInfo(getApplicationContext());
+                Log.i("taggg", "onClick: ");
+
+
             }
         });
     }
+
+
 
     private void testCountDownTimer() {
         CountDownTimer timer = new CountDownTimer(30000, 1000) {
@@ -183,7 +199,6 @@ public class MainActivity extends BaseActivity {
                 "请求权限",
                 "必须答应");
     }
-
 
 
     void tetsWebActivity() {

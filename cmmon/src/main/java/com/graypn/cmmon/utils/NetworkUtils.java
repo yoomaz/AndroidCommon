@@ -9,11 +9,11 @@ import android.util.Log;
 import java.lang.reflect.Method;
 
 /**
- * assist us in sensing state of the networks.
+ * 网络检测工具类
  * <p/>
  * need  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
  * <p/>
- * * Created by graypn on 16/1/20
+ * update by graypn on 17/8/21
  */
 public class NetworkUtils {
 
@@ -32,14 +32,13 @@ public class NetworkUtils {
         public int value;
     }
 
-    public enum NetWorkType {
+    public enum MobileNetType {
         UnKnown(-1),
-        Wifi(1),
         Net2G(2),
         Net3G(3),
         Net4G(4);
 
-        NetWorkType(int value) {
+        MobileNetType(int value) {
             this.value = value;
         }
 
@@ -48,69 +47,57 @@ public class NetworkUtils {
 
     /**
      * 判断网络连接是否有效（此时可传输数据）。
-     *
-     * @return boolean 不管wifi，还是mobile net，只有当前在连接状态（可有效传输数据）才返回true,反之false。
      */
     public static boolean isConnected(Context context) {
-        NetworkInfo net = getConnectivityManager(context).getActiveNetworkInfo();
-        return net != null && net.isConnected();
-    }
-
-    /**
-     * 获取网络的类型
-     */
-    public static NetType getConnectedType(Context context) {
-        NetworkInfo net = getConnectivityManager(context).getActiveNetworkInfo();
-        if (net != null) {
-            switch (net.getType()) {
-                case ConnectivityManager.TYPE_WIFI:
-                    return NetType.Wifi;
-                case ConnectivityManager.TYPE_MOBILE:
-                    return NetType.Mobile;
-                default:
-                    return NetType.Other;
-            }
-        }
-        return NetType.None;
-    }
-
-    /**
-     * 判断有无网络正在连接中（查找网络、校验、获取IP等）。
-     *
-     * @return boolean 不管wifi，还是mobile net，只有当前在连接状态（可有效传输数据）才返回true,反之false。
-     */
-    public static boolean isConnectedOrConnecting(Context context) {
-        NetworkInfo[] nets = getConnectivityManager(context).getAllNetworkInfo();
-        if (nets != null) {
-            for (NetworkInfo net : nets) {
-                if (net.isConnectedOrConnecting()) {
-                    return true;
-                }
+        ConnectivityManager connectivityManager = getConnectivityManager(context);
+        if (connectivityManager != null) {
+            NetworkInfo net = connectivityManager.getActiveNetworkInfo();
+            if (net != null && net.isConnected()) {
+                return true;
             }
         }
         return false;
     }
 
     /**
-     * 是否存在有效的WIFI连接
+     * 是否是WIFI连接
      */
     public static boolean isWifiConnected(Context context) {
-        NetworkInfo net = getConnectivityManager(context).getActiveNetworkInfo();
-        return net != null && net.getType() == ConnectivityManager.TYPE_WIFI && net.isConnected();
+        return getConnectedType(context) == NetType.Wifi;
     }
 
     /**
-     * 是否存在有效的移动连接
+     * 是否是移动连接
      */
     public static boolean isMobileConnected(Context context) {
-        NetworkInfo net = getConnectivityManager(context).getActiveNetworkInfo();
-        return net != null && net.getType() == ConnectivityManager.TYPE_MOBILE && net.isConnected();
+        return getConnectedType(context) == NetType.Mobile;
+    }
+
+    /**
+     * 获取网络的类型
+     */
+    private static NetType getConnectedType(Context context) {
+        ConnectivityManager connectivityManager = getConnectivityManager(context);
+        if (connectivityManager != null) {
+            NetworkInfo net = getConnectivityManager(context).getActiveNetworkInfo();
+            if (net != null) {
+                switch (net.getType()) {
+                    case ConnectivityManager.TYPE_WIFI:
+                        return NetType.Wifi;
+                    case ConnectivityManager.TYPE_MOBILE:
+                        return NetType.Mobile;
+                    default:
+                        return NetType.Other;
+                }
+            }
+        }
+        return NetType.None;
     }
 
     /**
      * 检测网络是否为可用状态
      */
-    public static boolean isAvailable(Context context) {
+    public static boolean isNetAvailable(Context context) {
         return isWifiAvailable(context) || (isMobileAvailable(context) && isMobileEnabled(context));
     }
 
@@ -175,23 +162,9 @@ public class NetworkUtils {
     }
 
     /**
-     * get connected network type by {@link ConnectivityManager}
-     * <p/>
-     * such as WIFI, MOBILE, ETHERNET, BLUETOOTH, etc.
-     *
-     * @return {@link ConnectivityManager#TYPE_WIFI}, {@link ConnectivityManager#TYPE_MOBILE},
-     * {@link ConnectivityManager#TYPE_ETHERNET}...
-     */
-    public static int getConnectedTypeINT(Context context) {
-        NetworkInfo net = getConnectivityManager(context).getActiveNetworkInfo();
-        if (net != null) {
-            Log.i(TAG, "NetworkInfo: " + net.toString());
-            return net.getType();
-        }
-        return -1;
-    }
-
-    /**
+     * 获取当前移动网络类型
+     * <p>
+     * <p>
      * GPRS    2G(2.5) General Packet Radia Service 114kbps
      * EDGE    2G(2.75G) Enhanced Data Rate for GSM Evolution 384kbps
      * UMTS    3G WCDMA 联通3G Universal Mobile Telecommunication System 完整的3G移动通信技术标准
@@ -207,27 +180,19 @@ public class NetworkUtils {
      * LTE     4G Long Term Evolution FDD-LTE 和 TDD-LTE , 3G过渡，升级版 LTE Advanced 才是4G
      * EHRPD   3G CDMA2000向LTE 4G的中间产物 Evolved High Rate Packet Data HRPD的升级
      * HSPAP   3G HSPAP 比 HSDPA 快些
-     *
-     * @return {@link  NetWorkType}
      */
-    public static NetWorkType getNetworkType(Context context) {
-        int type = getConnectedTypeINT(context);
-        switch (type) {
-            case ConnectivityManager.TYPE_WIFI:
-                return NetWorkType.Wifi;
-            case ConnectivityManager.TYPE_MOBILE:
-            case ConnectivityManager.TYPE_MOBILE_DUN:
-            case ConnectivityManager.TYPE_MOBILE_HIPRI:
-            case ConnectivityManager.TYPE_MOBILE_MMS:
-            case ConnectivityManager.TYPE_MOBILE_SUPL:
-                int teleType = getTelephonyManager(context).getNetworkType();
-                switch (teleType) {
+    public static MobileNetType getNetworkType(Context context) {
+        if (isMobileConnected(context)) {
+            TelephonyManager telephonyManager = getTelephonyManager(context);
+            if (telephonyManager != null) {
+                int telType = getTelephonyManager(context).getNetworkType();
+                switch (telType) {
                     case TelephonyManager.NETWORK_TYPE_GPRS:
                     case TelephonyManager.NETWORK_TYPE_EDGE:
                     case TelephonyManager.NETWORK_TYPE_CDMA:
                     case TelephonyManager.NETWORK_TYPE_1xRTT:
                     case TelephonyManager.NETWORK_TYPE_IDEN:
-                        return NetWorkType.Net2G;
+                        return MobileNetType.Net2G;
                     case TelephonyManager.NETWORK_TYPE_UMTS:
                     case TelephonyManager.NETWORK_TYPE_EVDO_0:
                     case TelephonyManager.NETWORK_TYPE_EVDO_A:
@@ -237,29 +202,53 @@ public class NetworkUtils {
                     case TelephonyManager.NETWORK_TYPE_EVDO_B:
                     case TelephonyManager.NETWORK_TYPE_EHRPD:
                     case TelephonyManager.NETWORK_TYPE_HSPAP:
-                        return NetWorkType.Net3G;
+                        return MobileNetType.Net3G;
                     case TelephonyManager.NETWORK_TYPE_LTE:
-                        return NetWorkType.Net4G;
-                    default:
-                        return NetWorkType.UnKnown;
+                        return MobileNetType.Net4G;
                 }
-            default:
-                return NetWorkType.UnKnown;
+            }
         }
+        return MobileNetType.UnKnown;
     }
 
     /**
      * 获取ConnectivityManager
+     * <p>
+     * 在部分手机上，获取系统服务可能会出异常
      */
     private static ConnectivityManager getConnectivityManager(Context context) {
-        return (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = null;
+        try {
+            connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return connectivityManager;
     }
 
     /**
      * 获取TelephonyManager
+     * <p>
+     * 在部分手机上，获取系统服务可能会出异常
      */
     private static TelephonyManager getTelephonyManager(Context context) {
-        return (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager telephonyManager = null;
+        try {
+            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return telephonyManager;
+    }
+
+    public static void testCurrentNetInfo(Context context) {
+        Log.i(TAG, "当前网络是否连接: " + isConnected(context));
+
+        Log.i(TAG, "是否是 WIFI: " + isWifiConnected(context));
+
+        Log.i(TAG, "是否是 移动网络: " + isMobileConnected(context));
+
+        Log.i(TAG, "当前移动网络类型: " + getNetworkType(context));
     }
 
 }
