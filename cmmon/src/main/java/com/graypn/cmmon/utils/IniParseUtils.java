@@ -2,7 +2,6 @@ package com.graypn.cmmon.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,9 +12,9 @@ import java.util.HashMap;
 
 /**
  * Ini 配置文件解析
- * <p>
- * Created by ZhuLei on 2017/3/9.
- * Email: zhuleineuq@gmail.com
+ *
+ * @author ZhuLei
+ * @date 2017/3/9.
  */
 
 public class IniParseUtils {
